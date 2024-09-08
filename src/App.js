@@ -1,13 +1,14 @@
 import React, { useState, useMemo, useCallback } from "react";
 import { NextUIProvider, Button, ButtonGroup } from "@nextui-org/react";
 
-import Stepper from "./components/Stepper";
+import Stepper from "./components/Default components/Stepper";
 
-import Step1 from "./components/Step1";
-import Step2 from "./components/Step2";
-import Step3 from "./components/Step3";
-import Step4 from "./components/Step4";
-import Step5 from "./components/Step5";
+import Step1 from "./components/Default components/Step1";
+import Step2 from "./components/Default components/Step2";
+import Step3 from "./components/Default components/Step3";
+import Step4 from "./components/Default components/Step4";
+import Step5 from "./components/Default components/Step5";
+import {Address} from "./components/Address";
 
 const App = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -45,23 +46,12 @@ const App = () => {
   }, []);
 
   return (
-    <NextUIProvider>
-      <div class="container mx-auto p-10">
-        <Stepper currentStep={currentStep} />
-        {CurrentForm}
-        <ButtonGroup>
-          <Button color="default" onPress={handleBack} isDisabled={isFirstStep}>
-            {"Atrás"}
-          </Button>
-          <Button
-            color={isLastStep ? "danger" : "primary"}
-            onPress={isLastStep ? undefined : handleForward}
-          >
-            {isLastStep ? "Pagar" : "Siguiente"}
-          </Button>
-        </ButtonGroup>
-      </div>
-    </NextUIProvider>
+      <NextUIProvider>
+        <div className="App">
+          <Address/>
+        </div>
+      </NextUIProvider>
+
   );
 };
 

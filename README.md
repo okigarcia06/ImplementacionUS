@@ -48,3 +48,8 @@ Abrir [http://localhost:3000](http://localhost:3000) para ver la app en el naveg
 
 La página se refresca al realizar cambios.
 Algunos errores y warnings aparecerán en la consola/terminal.
+
+Ejecutar el siguiente comando para abrir las Stories y visualizar el componente:
+```
+npm run storybook
+```

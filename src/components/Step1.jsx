@@ -1,4 +1,4 @@
-// Step1.jsx
+// paso 1: Seleccionar tipo de carga (con algún elemento tipo droplist que liste los tipos de carga y seleccione 1).
 import React, { useState, useEffect } from "react";
 import {
   Dropdown,
@@ -8,20 +8,17 @@ import {
   Button,
 } from "@nextui-org/react";
 
-const Step1 = ({ onSelectType }) => {
+const Step1 = () => {
   const [selectedType, setSelectedType] = useState("");
-
-  useEffect(() => {
-    onSelectType(selectedType);
-  }, [selectedType, onSelectType]);
-
   const handleSelection = (key) => {
     setSelectedType(key);
   };
 
   return (
     <div className="p-4">
-      <h1 className="text-xl font-bold mb-4">Paso 1: Seleccionar Tipo de Carga</h1>
+      <label className="text-lg font-semibold text-primary mb-1 block">
+        Tipo de Carga
+      </label>
       <Dropdown className="w-full">
         <DropdownTrigger>
           <Button

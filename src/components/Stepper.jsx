@@ -25,11 +25,11 @@ const Stepper = ({ currentStep }) => {
       {steps.map((step, index) => {
         const isCurrentStep = index + 1 === currentStep;
         const liStyles = isCurrentStep
-          ? "text-blue-600 dark:text-blue-500"
-          : "text-gray-500 dark:text-gray-400";
+          ? "text-[#0077b6] dark:text-[#00b4d8]"
+          : "text-[#03045e] dark:text-[#90e0ef]";
         const spanStyles = isCurrentStep
-          ? "border-blue-600"
-          : "border-gray-500";
+          ? "border-[#0077b6]"
+          : "border-[#03045e]";
 
         return (
           <li key={index} className={`flex items-center space-x-2.5 ${liStyles}`}>
@@ -39,7 +39,7 @@ const Stepper = ({ currentStep }) => {
               {step.id}
             </span>
             <span>
-              <h3 className="font-medium leading-tight">{step.title}</h3>
+              <h3 className="font-bold leading-tight">{step.title}</h3>
             </span>
           </li>
         );
@@ -49,3 +49,4 @@ const Stepper = ({ currentStep }) => {
 };
 
 export default Stepper;
+

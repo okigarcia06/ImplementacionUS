@@ -6,7 +6,7 @@
 // App.jsx
 import React, { useState, useMemo, useCallback } from "react";
 import { NextUIProvider, Button, ButtonGroup } from "@nextui-org/react";
-
+import NavBar from "./components/NavBar";
 import Stepper from "./components/Stepper";
 import Step1 from "./components/Step1";
 import Step2 from "./components/Step2";
@@ -47,27 +47,40 @@ const App = () => {
   }, [currentStep]);
 
   return (
-    <NextUIProvider>
-      <div className="container mx-auto p-10">
-        <Stepper currentStep={currentStep} />
-        {CurrentForm}
-        <ButtonGroup>
-          <Button color="default" onPress={handleBack} isDisabled={isFirstStep}>
-            {"Atrás"}
-          </Button>
-          <Button
-            color={isLastStep ? "danger" : "primary"}
-            onPress={isLastStep ? undefined : handleForward}
-            isDisabled={isFirstStep && !selectedType}
-          >
-            {isLastStep ? "Publicar" : "Siguiente"}
-          </Button>
-        </ButtonGroup>
-      </div>
-    </NextUIProvider>
+    <div className="w-screen h-screen bg-background font-serif">
+      <NavBar />
+      <NextUIProvider>
+        <div className="container mx-auto p-10">
+          <Stepper currentStep={currentStep} />
+          {CurrentForm}
+          <ButtonGroup className="mt-5">
+            <Button
+              className={`${
+                isFirstStep ? "bg-gray-300 text-gray-500 cursor-not-allowed" : "bg-dark text-white hover:bg-primary"
+              } font-serif`}
+              onPress={handleBack}
+              isDisabled={isFirstStep}
+            >
+              Atrás
+            </Button>
+            <Button
+              className={`${
+                isLastStep ? "bg-hover text-white" : "bg-primary text-white hover:bg-hover"
+              } font-serif`}
+              isDisabled={isLastStep}
+              onPress={isLastStep ? undefined : handleForward}
+            >
+              {isLastStep ? "Publicar" : "Siguiente"}
+            </Button>
+          </ButtonGroup>
+        </div>
+      </NextUIProvider>
+    </div>
   );
 };
 
 export default App;
 
-  
+
+
+

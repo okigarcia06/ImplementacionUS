@@ -26,7 +26,7 @@ const Step1 = ({ onSelectType }) => {
         <DropdownTrigger>
           <Button
             variant="solid"
-            className="font-montserrat capitalize relative w-full inline-flex tap-highlight-transparent shadow-sm px-3 bg-default-100 data-[hover=true]:bg-default-200 min-h-unit-10 rounded-medium flex-col items-start justify-center gap-0 transition-background motion-reduce:transition-none !duration-150 outline-none group-data-[focus-visible=true]:z-10 group-data-[focus-visible=true]:ring-2 group-data-[focus-visible=true]:ring-focus group-data-[focus-visible=true]:ring-offset-2 group-data-[focus-visible=true]:ring-offset-background h-14 py-2"
+            className="capitalize relative w-full inline-flex tap-highlight-transparent shadow-sm px-3 bg-default-100 data-[hover=true]:bg-default-200 min-h-unit-10 rounded-medium flex-col items-start justify-center gap-0 transition-background motion-reduce:transition-none !duration-150 outline-none group-data-[focus-visible=true]:z-10 group-data-[focus-visible=true]:ring-2 group-data-[focus-visible=true]:ring-focus group-data-[focus-visible=true]:ring-offset-2 group-data-[focus-visible=true]:ring-offset-background h-14 py-2"
           >
             {selectedType ? selectedType : "Seleccione el tipo de carga"}
           </Button>
@@ -35,7 +35,7 @@ const Step1 = ({ onSelectType }) => {
           aria-label="Selección de tipo de carga"
           selectionMode="single"
           onSelectionChange={handleSelection}
-          className="font-montserrat"
+          className=""
         >
           <DropdownItem key="documentacion">Documentación</DropdownItem>
           <DropdownItem key="paquete">Paquete</DropdownItem>

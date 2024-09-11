@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&display=swap');
+
+/* Aplica la fuente a toda la aplicación */
+body {
+@apply font-serif;
+}
+

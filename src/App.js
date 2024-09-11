@@ -3,68 +3,71 @@
   // Paso 3: Ingresar datos de entrega (Básicamente lo mismo que el paso 2, validando que la fecha de retiro sea mayor o igual a la fecha seleccionada en el retiro y validar que el domicilio de retiro no sea igual al de entrega).
   // Paso 4: Publicar el pedido (en esta parte básicamente hacemos un inputloader para subir fotos (validar que sea solo en el formato especificado jpg o png, max 3 fotos, no mas de 10mb) y por último un botón de publicar que cuando lo aprieten se envíe la notificación por email y la notificación push. 
 
-  import React, { useState, useMemo, useCallback } from "react";
-  import { NextUIProvider, Button, ButtonGroup } from "@nextui-org/react";
-  
-  import Stepper from "./components/Stepper";
-  
-  import Step1 from "./components/Step1";
-  import Step2 from "./components/Step2";
-  import Step3 from "./components/Step3";
-  import Step4 from "./components/Step4";
-  
-  const App = () => {
-    const [currentStep, setCurrentStep] = useState(1);
-    const isFirstStep = currentStep === 1;
-    const isLastStep = currentStep === 4;
-  
-    const CurrentForm = useMemo(() => {
-      switch (currentStep) {
-        case 1:
-          return <Step1 />;
-        case 2:
-          return <Step2 />;
-        case 3:
-          return <Step3 />;
-        case 4:
-          return <Step4 />;
-        default:
-          break;
-      }
-    }, [currentStep]);
-  
-    const handleBack = useCallback(() => {
-      setCurrentStep((currentStep) => {
-        return currentStep - 1;
-      });
-    }, []);
-  
-    const handleForward = useCallback(() => {
-      setCurrentStep((currentStep) => {
-        return currentStep + 1;
-      });
-    }, []);
-  
-    return (
-      <NextUIProvider>
-        <div className="container mx-auto p-10">
-          <Stepper currentStep={currentStep} />
-          {CurrentForm}
-          <ButtonGroup>
-            <Button color="default" onPress={handleBack} isDisabled={isFirstStep}>
-              {"Atrás"}
-            </Button>
-            <Button
-              color={isLastStep ? "danger" : "primary"}
-              onPress={isLastStep ? undefined : handleForward}
-            >
-              {isLastStep ? "Publicar" : "Siguiente"}
-            </Button>
-          </ButtonGroup>
-        </div>
-      </NextUIProvider>
-    );
+// App.jsx
+import React, { useState, useMemo, useCallback } from "react";
+import { NextUIProvider, Button, ButtonGroup } from "@nextui-org/react";
+
+import Stepper from "./components/Stepper";
+import Step1 from "./components/Step1";
+import Step2 from "./components/Step2";
+import Step3 from "./components/Step3";
+import Step4 from "./components/Step4";
+
+const App = () => {
+  const [currentStep, setCurrentStep] = useState(1);
+  const [selectedType, setSelectedType] = useState("");
+  const isFirstStep = currentStep === 1;
+  const isLastStep = currentStep === 4;
+
+  const handleBack = useCallback(() => {
+    setCurrentStep((prev) => prev - 1);
+  }, []);
+
+  const handleForward = useCallback(() => {
+    setCurrentStep((prev) => prev + 1);
+  }, []);
+
+  const handleTypeSelection = (type) => {
+    setSelectedType(type);
   };
-  
-  export default App;
+
+  const CurrentForm = useMemo(() => {
+    switch (currentStep) {
+      case 1:
+        return <Step1 onSelectType={handleTypeSelection} />;
+      case 2:
+        return <Step2 />;
+      case 3:
+        return <Step3 />;
+      case 4:
+        return <Step4 />;
+      default:
+        return null;
+    }
+  }, [currentStep]);
+
+  return (
+    <NextUIProvider>
+      <div className="container mx-auto p-10">
+        <Stepper currentStep={currentStep} />
+        {CurrentForm}
+        <ButtonGroup>
+          <Button color="default" onPress={handleBack} isDisabled={isFirstStep}>
+            {"Atrás"}
+          </Button>
+          <Button
+            color={isLastStep ? "danger" : "primary"}
+            onPress={isLastStep ? undefined : handleForward}
+            isDisabled={isFirstStep && !selectedType}
+          >
+            {isLastStep ? "Publicar" : "Siguiente"}
+          </Button>
+        </ButtonGroup>
+      </div>
+    </NextUIProvider>
+  );
+};
+
+export default App;
+
   

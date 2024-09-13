@@ -2,13 +2,13 @@
   import React, { useState, useEffect } from "react";
   import { Input } from "@nextui-org/react";
   import AddressForm from "./AddressForm";
+  import Swal from "sweetalert2"; // Importar SweetAlert2
   
   const Step3 = ({ pickupAddress, pickupDate, onSelectDeliveryAddress, onSelectDeliveryDate, onValidationChange }) => {
     const [deliveryAddress, setDeliveryAddress] = useState({});
     const [deliveryDate, setDeliveryDate] = useState("");
     const [isDateValid, setIsDateValid] = useState(false);
     const [isAddressValid, setIsAddressValid] = useState(false);
-    const [error, setError] = useState("");
   
     useEffect(() => {
       const dateIsValid = validateDate(deliveryDate);
@@ -18,15 +18,29 @@
       onValidationChange(isValid); // Notificar el estado de la validación al componente padre
     }, [deliveryDate, deliveryAddress, pickupAddress, pickupDate, onValidationChange]);
   
+    // Validar la fecha de entrega
     const validateDate = (date) => {
-      if (!pickupDate || !date) return false; // Si no hay fecha de retiro o de entrega, mostrar error
+      if (!pickupDate || !date) {
+        return false; // Si no hay fecha de retiro o de entrega, no se considera válido
+      }
+      
       const isValid = new Date(date) >= new Date(pickupDate);
       setIsDateValid(isValid);
+      
+      if (!isValid) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Fecha inválida',
+          text: 'La fecha de entrega debe ser igual o posterior a la fecha de retiro.',
+          confirmButtonText: 'Entendido'
+        });
+      }
+  
       return isValid;
     };
   
+    // Validar la dirección de entrega
     const validateAddress = () => {
-      // Verificar si el domicilio de entrega es diferente al de retiro
       const isValid = !(
         pickupAddress.streetName === deliveryAddress.streetName &&
         pickupAddress.streetNumber === deliveryAddress.streetNumber &&
@@ -35,10 +49,14 @@
       );
   
       if (!isValid) {
-        setError("El domicilio de entrega no puede ser el mismo que el de retiro.");
-      } else {
-        setError("");
+        Swal.fire({
+          icon: 'error',
+          title: 'Dirección inválida',
+          text: 'El domicilio de entrega no puede ser el mismo que el de retiro.',
+          confirmButtonText: 'Entendido'
+        });
       }
+  
       setIsAddressValid(isValid);
       return isValid;
     };
@@ -72,14 +90,10 @@
             onChange={handleDateChange}
             className="w-full"
           />
-          {!isDateValid && deliveryDate && (
-            <p className="text-red-500 mt-2">La fecha de entrega debe ser igual o posterior a la fecha de retiro.</p>
-          )}
         </div>
-  
-        {error && <p className="text-red-500 mt-2">{error}</p>}
       </div>
     );
   };
   
   export default Step3;
+  

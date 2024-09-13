@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Input } from "@nextui-org/react";
 import AddressForm from "./AddressForm";
+import Swal from 'sweetalert2'; // Importar SweetAlert2 correctamente
 
 const Step2 = ({ onSelectPickupAddress, onSelectPickupDate, onValidationChange }) => {
   const [pickupAddress, setPickupAddress] = useState({});
@@ -19,6 +20,18 @@ const Step2 = ({ onSelectPickupAddress, onSelectPickupDate, onValidationChange }
     setIsDateValid(isValid);
     return isValid;
   };
+
+  // Mostrar alerta cuando la fecha no es válida
+  useEffect(() => {
+    if (!isDateValid && pickupDate) {
+      Swal.fire({
+        title: "Error",
+        text: "La fecha debe ser igual o posterior a la fecha actual.",
+        icon: "error",
+        confirmButtonText: "Aceptar",
+      });
+    }
+  }, [isDateValid, pickupDate]);
 
   return (
     <div className="p-4">
@@ -44,21 +57,10 @@ const Step2 = ({ onSelectPickupAddress, onSelectPickupDate, onValidationChange }
           }}
           className="w-full bg-default-100 rounded-medium shadow-sm"
         />
-        {!isDateValid && pickupDate && (
-          <p className="text-red-500 mt-2">La fecha debe ser igual o posterior a la fecha actual.</p>
-        )}
       </div>
     </div>
   );
 };
 
 export default Step2;
-
-
-
-
-
-
-
-
 

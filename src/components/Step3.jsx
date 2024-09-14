@@ -4,7 +4,7 @@
   import AddressForm from "./AddressForm";
   import Swal from "sweetalert2"; // Importar SweetAlert2
   
-  const Step3 = ({ pickupAddress, pickupDate, onSelectDeliveryAddress, onSelectDeliveryDate, onValidationChange }) => {
+  const Step3 = ({ pickupAddress, pickupDate, onSelectDeliveryAddress,onValidationChange }) => {
     const [deliveryAddress, setDeliveryAddress] = useState({});
     const [deliveryDate, setDeliveryDate] = useState("");
     const [isDateValid, setIsDateValid] = useState(false);
@@ -74,7 +74,7 @@
   
     return (
       <div className="p-4">
-        <h2 className="text-2xl font-bold mb-4">Datos de Entrega</h2>
+        <h2 className="text-2xl font-bold mb-4 text-dark">Datos de Entrega</h2>
   
         <AddressForm
           onAddressChange={handleAddressChange}
@@ -83,7 +83,7 @@
   
         <div className="mb-4">
           <label className="text-lg font-semibold text-primary mb-1 block">
-            Fecha de Entrega
+            Fecha de Entrega <span className="text-red-500">*</span>
           </label>
           <Input
             type="date"

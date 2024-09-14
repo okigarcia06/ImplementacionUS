@@ -1,3 +1,4 @@
+//Componente de Barra de arriba (header)
 import React from "react";
 import { Navbar, NavbarBrand } from "@nextui-org/react";
 

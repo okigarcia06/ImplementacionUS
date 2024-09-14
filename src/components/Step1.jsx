@@ -11,7 +11,7 @@ const Step1 = ({ onSelectType }) => {
 
   return (
     <div className="p-4">
-      <label className="text-lg font-semibold text-primary mb-1 block">Tipo de Carga</label>
+      <h2 className="text-2xl font-bold mb-4 text-dark">Tipo de Carga</h2>
       <Dropdown className="w-full">
         <DropdownTrigger>
           <Button

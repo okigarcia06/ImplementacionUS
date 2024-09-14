@@ -37,7 +37,7 @@ const Step2 = ({ onSelectPickupAddress, onSelectPickupDate, onValidationChange }
 
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Datos de Retiro</h2>
+      <h2 className="text-2xl font-bold mb-4 text-dark">Datos de Retiro</h2>
       <AddressForm
         onAddressChange={(address) => {
           setPickupAddress(address);
@@ -46,7 +46,7 @@ const Step2 = ({ onSelectPickupAddress, onSelectPickupDate, onValidationChange }
         initialAddress={pickupAddress}
       />
       <div className="mb-4">
-        <label className="text-lg font-semibold text-primary mb-1 block">Fecha de Retiro</label>
+        <label className="text-lg font-semibold text-primary mb-1 block">Fecha de Retiro <span className="text-red-500">*</span></label>
         <Input
           type="date"
           value={pickupDate}

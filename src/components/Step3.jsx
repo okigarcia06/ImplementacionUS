@@ -12,11 +12,13 @@
   
     useEffect(() => {
       const dateIsValid = validateDate(deliveryDate);
-      const addressIsValid = validateAddress();
-      const isValid = dateIsValid && addressIsValid;
-  
+      const addressIsComplete = deliveryAddress.province && deliveryAddress.locality && deliveryAddress.streetName && deliveryAddress.streetNumber;
+      const addressIsValid = validateAddress(); // Esta función ya compara las direcciones
+      
+      const isValid = dateIsValid && addressIsComplete && addressIsValid;
       onValidationChange(isValid); // Notificar el estado de la validación al componente padre
     }, [deliveryDate, deliveryAddress, pickupAddress, pickupDate, onValidationChange]);
+    
   
     // Validar la fecha de entrega
     const validateDate = (date) => {
@@ -75,7 +77,6 @@
         <h2 className="text-2xl font-bold mb-4">Datos de Entrega</h2>
   
         <AddressForm
-          title="Datos de Entrega"
           onAddressChange={handleAddressChange}
           initialAddress={deliveryAddress}
         />

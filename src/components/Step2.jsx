@@ -10,9 +10,11 @@ const Step2 = ({ onSelectPickupAddress, onSelectPickupDate, onValidationChange }
   const [isDateValid, setIsDateValid] = useState(true);
 
   useEffect(() => {
-    const isValid = validateDate(pickupDate) && Object.keys(pickupAddress).length > 0;
+    const isAddressComplete = pickupAddress.province && pickupAddress.locality && pickupAddress.streetName && pickupAddress.streetNumber;
+    const isValid = validateDate(pickupDate) && isAddressComplete;
     onValidationChange(isValid);
   }, [pickupDate, pickupAddress, onValidationChange]);
+  
 
   const validateDate = (date) => {
     const today = new Date().toISOString().split("T")[0];
@@ -37,7 +39,6 @@ const Step2 = ({ onSelectPickupAddress, onSelectPickupDate, onValidationChange }
     <div className="p-4">
       <h2 className="text-2xl font-bold mb-4">Datos de Retiro</h2>
       <AddressForm
-        title="Datos de Retiro"
         onAddressChange={(address) => {
           setPickupAddress(address);
           onSelectPickupAddress(address);

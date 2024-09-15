@@ -4,31 +4,30 @@
   import AddressForm from "./AddressForm";
   import Swal from "sweetalert2"; // Importar SweetAlert2
   
-  const Step3 = ({ pickupAddress, pickupDate, onSelectDeliveryAddress,onValidationChange }) => {
+  const Step3 = ({ pickupAddress, pickupDate, onSelectDeliveryAddress, onValidationChange }) => {
     const [deliveryAddress, setDeliveryAddress] = useState({});
     const [deliveryDate, setDeliveryDate] = useState("");
-    const [isDateValid, setIsDateValid] = useState(false);
-    const [isAddressValid, setIsAddressValid] = useState(false);
+    const [isDateValid, setIsDateValid] = useState(true);
+    const [isAddressValid, setIsAddressValid] = useState(true);
   
     useEffect(() => {
       const dateIsValid = validateDate(deliveryDate);
       const addressIsComplete = deliveryAddress.province && deliveryAddress.locality && deliveryAddress.streetName && deliveryAddress.streetNumber;
       const addressIsValid = validateAddress(); // Esta función ya compara las direcciones
-      
+  
       const isValid = dateIsValid && addressIsComplete && addressIsValid;
       onValidationChange(isValid); // Notificar el estado de la validación al componente padre
     }, [deliveryDate, deliveryAddress, pickupAddress, pickupDate, onValidationChange]);
-    
   
     // Validar la fecha de entrega
     const validateDate = (date) => {
       if (!pickupDate || !date) {
         return false; // Si no hay fecha de retiro o de entrega, no se considera válido
       }
-      
+  
       const isValid = new Date(date) >= new Date(pickupDate);
       setIsDateValid(isValid);
-      
+  
       if (!isValid) {
         Swal.fire({
           icon: 'error',
@@ -73,7 +72,7 @@
     };
   
     return (
-      <div className="p-4">
+      <div className="max-w-md mx-auto p-4 mt-8 bg-white rounded-md shadow-lg">
         <h2 className="text-2xl font-bold mb-4 text-dark">Datos de Entrega</h2>
   
         <AddressForm
@@ -89,7 +88,7 @@
             type="date"
             value={deliveryDate}
             onChange={handleDateChange}
-            className="w-full"
+            className="w-full bg-default-100 rounded-md shadow-sm"
           />
         </div>
       </div>

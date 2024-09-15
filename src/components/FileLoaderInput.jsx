@@ -105,7 +105,7 @@ function FileLoaderInput(props) {
 
     return (
         <div className="upload-container mt-4">
-            <label htmlFor="file_upload">Buscar localmente o arrastra y suelta</label>
+            <label htmlFor="file_upload">Buscar localmente o arrastra</label>
             <input
                 type="file"
                 id="file_upload"

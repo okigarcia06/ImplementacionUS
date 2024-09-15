@@ -93,7 +93,7 @@ const App = () => {
     }, [currentStep, pickupAddress, pickupDate, deliveryAddress, deliveryDate]);
 
     return (
-        <div className="w-screen h-screen bg-background font-serif flex flex-col">
+        <div className="w-screen h-screen bg-background font-serif flex flex-col overflow-x-hidden">
             <NavBar />
             <div className="flex flex-col flex-grow container mx-auto p-10">
                 <Stepper currentStep={currentStep} />

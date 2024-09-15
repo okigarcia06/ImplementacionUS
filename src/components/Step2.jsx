@@ -36,7 +36,7 @@ const Step2 = ({ onSelectPickupAddress, onSelectPickupDate, onValidationChange }
   }, [isDateValid, pickupDate]);
 
   return (
-    <div className="p-4 max-w-md mx-auto mt-8 bg-white rounded-md shadow-lg">
+    <div className="p-4 max-w-md mx-auto mt-8 bg-light rounded-md shadow-lg">
       <h2 className="text-2xl font-bold mb-4 text-dark">Datos de Retiro</h2>
       <AddressForm
         onAddressChange={(address) => {

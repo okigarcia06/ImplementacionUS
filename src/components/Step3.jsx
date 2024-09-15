@@ -72,7 +72,7 @@
     };
   
     return (
-      <div className="max-w-md mx-auto p-4 mt-8 bg-white rounded-md shadow-lg">
+      <div className="max-w-md mx-auto p-4 mt-8 bg-light rounded-md shadow-lg">
         <h2 className="text-2xl font-bold mb-4 text-dark">Datos de Entrega</h2>
   
         <AddressForm
